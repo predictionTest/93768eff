@@ -1,92 +1,131 @@
+/* Simpsons-inspired theme */
 .App {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.92) 0 18%, rgba(255, 255, 255, 0) 19%),
+        radial-gradient(circle at 40% 35%, rgba(255, 255, 255, 0.85) 0 14%, rgba(255, 255, 255, 0) 15%),
+        radial-gradient(circle at 70% 25%, rgba(255, 255, 255, 0.9) 0 16%, rgba(255, 255, 255, 0) 17%),
+        radial-gradient(circle at 85% 45%, rgba(255, 255, 255, 0.9) 0 14%, rgba(255, 255, 255, 0) 15%),
+        linear-gradient(180deg, var(--sky-1) 0%, var(--sky-2) 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
     text-align: center;
-    background: white;
+    background: var(--yellow-1);
     padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 24px;
+    border: 6px solid var(--outline);
+    box-shadow: 0 10px 0 rgba(0, 0, 0, 0.15);
     max-width: 500px;
     width: 90%;
 }
 
 h1 {
-    color: #333;
-    font-size: 3rem;
-    margin-bottom: 30px;
+    color: var(--outline);
+    font-family: var(--heading-font);
+    font-size: clamp(2.25rem, 6vw, 3.25rem);
+    margin-bottom: 28px;
     font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.12), 4px 4px 0 rgba(0, 0, 0, 0.06);
 }
 
 .greeting-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 16px;
     margin-bottom: 20px;
 }
 
 .greeting-input {
     padding: 15px;
     font-size: 16px;
-    border: 2px solid #667eea;
-    border-radius: 10px;
+    border: 4px solid var(--outline);
+    border-radius: 14px;
     outline: none;
-    transition: border-color 0.3s;
+    transition: box-shadow 0.2s ease, transform 0.1s ease;
+    background: var(--yellow-2);
+    color: var(--outline);
 }
 
-.greeting-input:focus {
-    border-color: #764ba2;
+.greeting-input::placeholder {
+    color: #6a5f00;
+    opacity: 0.8;
+}
+
+.greeting-input:focus-visible {
+    outline: 3px dashed var(--outline);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(255, 217, 15, 0.45);
 }
 
 .submit-button {
     padding: 15px 30px;
     font-size: 16px;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
-    border-radius: 10px;
+    font-weight: 700;
+    color: var(--yellow-1);
+    background: linear-gradient(180deg, var(--blue-accent) 0%, #1258a8 100%);
+    border: 4px solid var(--outline);
+    border-radius: 14px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    font-family: var(--ui-font);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
 }
 
 .submit-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.15);
 }
 
 .submit-button:active {
     transform: translateY(0);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15) inset;
+}
+
+.submit-button:focus-visible {
+    outline: 3px dashed var(--outline);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.35);
 }
 
 .custom-greeting {
-    margin-top: 30px;
+    margin-top: 28px;
     padding: 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 10px;
-    animation: fadeIn 0.5s;
+    background: linear-gradient(135deg, var(--sky-1) 0%, var(--sky-2) 100%);
+    border-radius: 18px;
+    border: 4px solid var(--outline);
+    animation: fadeIn 420ms ease-out;
 }
 
 .custom-greeting h2 {
-    color: white;
-    font-size: 2rem;
+    color: var(--outline);
+    font-size: clamp(1.5rem, 4.5vw, 2.25rem);
     margin: 0;
-    font-weight: 600;
+    font-weight: 800;
+    font-family: var(--heading-font);
+    text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 0.12);
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
+    0% { opacity: 0; transform: translateY(-8px) scale(0.98); }
+    60% { opacity: 1; transform: translateY(2px) scale(1.02); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@media (prefers-reduced-motion: reduce) {
+    .submit-button,
+    .greeting-input,
+    .custom-greeting { transition: none; animation: none; }
+}
+
+@media (max-width: 380px) {
+    .container { padding: 28px; border-width: 5px; }
+    .greeting-input, .submit-button { font-size: 15px; }
 }
